@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - NimbusVault</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <a class="navbar-brand" href="#"><img src="assets/logo-white.png" alt="NimbusVault" style="height: 30px;"> NimbusVault</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="form-inline my-2 my-lg-0 mr-auto">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search files..." aria-label="Search">
+            </form>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                        <img src="assets/avatar.png" width="30" height="30" class="rounded-circle mr-1"> User
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="login.html">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="sidebar-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-folder mr-2"></i> My Files</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-users mr-2"></i> Shared with Me</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-clock mr-2"></i> Recent</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-trash mr-2"></i> Trash</a></li>
+                    </ul>
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Storage</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <div class="px-3">
+                                <small>2.7 GB of 15 GB used</small>
+                                <div class="progress" style="height: 5px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 18%;" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="pricing.html"><i class="fas fa-cloud-upload-alt mr-2"></i> Upgrade Storage</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">My Files</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-sm btn-outline-secondary mr-2" id="newFolderBtn"><i class="fas fa-folder-plus mr-1"></i> New Folder</button>
+                        <label class="btn btn-sm btn-primary" for="uploadFile">
+                            <i class="fas fa-upload mr-1"></i> Upload File
+                        </label>
+                        <input type="file" id="uploadFile" style="display: none;">
+                    </div>
+                </div>
+
+                <!-- File list goes here -->
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width: 50%;">Name</th>
+                                <th>Last Modified</th>
+                                <th>Size</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fileList">
+                            <!-- JS will populate this, or hardcode -->
+                            <tr>
+                                <td><i class="fas fa-folder text-warning mr-2"></i> Project Alpha</td>
+                                <td>Oct 26, 2023</td>
+                                <td>--</td>
+                                <td><button class="btn btn-sm btn-outline-info share-btn" data-link="AbCdEf1234"><i class="fas fa-share-alt"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-file-pdf text-danger mr-2"></i> Annual_Report.pdf</td>
+                                <td>Oct 25, 2023</td>
+                                <td>2.1 MB</td>
+                                <td><button class="btn btn-sm btn-outline-info share-btn" data-link="GhIjKl5678"><i class="fas fa-share-alt"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-file-image text-info mr-2"></i> Vacation_Photo_01.jpg</td>
+                                <td>Oct 22, 2023</td>
+                                <td>4.5 MB</td>
+                                <td><button class="btn btn-sm btn-outline-info share-btn" data-link="MnOpQr9012"><i class="fas fa-share-alt"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal fade" id="shareModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Share File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Share this link publicly:</p>
+                    <input type="text" class="form-control" id="shareLinkInput" readonly>
+                    <small>Anyone with this link can view the file. NimbusVault is popular for sharing resources like this!</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="copyLinkBtn">Copy Link</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/dashboard.js"></script> <!-- Your custom JS -->
+</body>
+</html>
